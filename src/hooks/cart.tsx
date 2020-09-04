@@ -90,25 +90,14 @@ const CartProvider: React.FC = ({ children }) => {
           : product,
       );
 
-      // const product = products.find(cartProduct => cartProduct.id === id);
-      // const productIndex = products.findIndex(
-      //   cartProduct => cartProduct.id === id,
-      // );
-      // if (product) {
-      //   product.quantity -= 1;
-      //   product.quantity < 1
-      //     ? setProducts(products.splice(productIndex, 1))
-      //     : (setProducts(products.splice(productIndex, 1, product)),
-      //       await AsyncStorage.setItem(
-      //         '@GoMarketPlace:products',
-      //         JSON.stringify(products.splice(productIndex, 1, product)),
-      //       ));
-      // }
+      const FilteredProducts = newProducts.filter(
+        product => product.quantity >= 1,
+      );
 
-      setProducts(newProducts);
+      setProducts(FilteredProducts);
       await AsyncStorage.setItem(
         '@GoMarketPlace:products',
-        JSON.stringify(newProducts),
+        JSON.stringify(FilteredProducts),
       );
     },
     [products],
